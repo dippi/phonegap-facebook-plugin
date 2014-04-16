@@ -31,9 +31,9 @@ var facebookConnectPlugin = {
 	    cordova.exec(s, f, "FacebookConnectPlugin", "logout", []);
 	},
 	
-	api: function(graphPath, permissions, s, f) {
-            cordova.exec(s, f, "FacebookConnectPlugin", "graphApi", [graphPath, permissions]);
-        }
+	api: function(path, method, params, callback, f) {
+		cordova.exec(callback, f, "FacebookConnectPlugin", "graphApi", [path, method, params, callback]);
+	}
 	    	    
 };
 

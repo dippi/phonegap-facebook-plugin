@@ -22,6 +22,7 @@ import android.util.Log;
 import com.facebook.FacebookDialogException;
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
+import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -333,7 +334,30 @@ public class ConnectPlugin extends CordovaPlugin {
     			callbackContext.error("Unsupported dialog method.");
     		}
             return true;
-        }        
+        } else if (action.equals("graphApi")) {
+			Bundle bundle = new Bundle();
+
+			JSONObject params = args.getJSONObject(2);
+			Iterator<?> keys = params.keys();
+			while (keys.hasNext()) {
+				String key = (String) keys.next();
+				bundle.putString(key, params.getString(key));
+			}
+	
+			final CallbackContext callback = callbackContext;
+
+			new Request(Session.getActiveSession(), args.getString(0), bundle,
+					HttpMethod.valueOf(args.getString(1)),
+					new Request.Callback() {
+
+						@Override
+						public void onCompleted(Response response) {
+							callback.success(response.getGraphObject().getInnerJSONObject());
+						}
+					}).executeAsync();
+
+			return true;
+		}
         return false;
     }
     
