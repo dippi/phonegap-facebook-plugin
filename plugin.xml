@@ -21,14 +21,6 @@
     <asset src="www/cdv-plugin-fb-connect.js" target="cdv-plugin-fb-connect.js" />
     <asset src="www/facebook-js-sdk.js" target="facebook-js-sdk.js" />
     
-    <config-file target="config.xml" parent="/*">
-	    <access origin="https://m.facebook.com" />
-	    <access origin="https://graph.facebook.com" />
-	    <access origin="https://api.facebook.com" />
-	    <access origin="https://*.fbcdn.net" />
-	    <access origin="https://*.akamaihd.net" />
-    </config-file>
-    
     <preference name="APP_ID" />
 	<preference name="APP_NAME" />
     
@@ -46,8 +38,16 @@
     
     <!-- android -->
     <platform name="android">
+    
+		<config-file target="res/xml/config.xml" parent="/*">
+			<access origin="https://m.facebook.com" />
+			<access origin="https://graph.facebook.com" />
+			<access origin="https://api.facebook.com" />
+			<access origin="https://*.fbcdn.net" />
+			<access origin="https://*.akamaihd.net" />
+		</config-file>
         
-        <config-file target="config.xml" parent="/*">
+        <config-file target="res/xml/config.xml" parent="/*">
             <feature name="FacebookConnectPlugin">
                 <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin" />
             </feature>
@@ -74,6 +74,14 @@
     
     <!-- ios -->
     <platform name="ios">
+    	<config-file target="config.xml" parent="/*">
+			<access origin="https://m.facebook.com" />
+			<access origin="https://graph.facebook.com" />
+			<access origin="https://api.facebook.com" />
+			<access origin="https://*.fbcdn.net" />
+			<access origin="https://*.akamaihd.net" />
+		</config-file>
+    
 	    <config-file target="config.xml" parent="/*">
 		    <feature name="FacebookConnectPlugin">
 			    <param name="ios-package" value="FacebookConnectPlugin"/>
